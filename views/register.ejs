@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>User Registration</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <h1>User Registration</h1>
+    <form action="/register" method="post" enctype="multipart/form-data">
+      <div>
+        <label>Username</label>
+        <input type="text" name="username" value="<%= data.username || '' %>" />
+        <span class="error"><%= errors.username || '' %></span>
+      </div>
+      <div>
+        <label>Password</label>
+        <input type="password" name="password" />
+        <span class="error"><%= errors.password || '' %></span>
+      </div>
+      <div>
+        <label>Confirm Password</label>
+        <input type="password" name="confirmPassword" />
+        <span class="error"><%= errors.confirmPassword || '' %></span>
+      </div>
+      <div>
+        <label>Email</label>
+        <input type="email" name="email" value="<%= data.email || '' %>" />
+        <span class="error"><%= errors.email || '' %></span>
+      </div>
+      <div>
+        <label>Gender</label>
+        <label
+          ><input type="radio" name="gender" value="male" <%=
+          data.gender==='male'?'checked':'' %> /> Male</label
+        >
+        <label
+          ><input type="radio" name="gender" value="female" <%=
+          data.gender==='female'?'checked':'' %> /> Female</label
+        >
+        <label
+          ><input type="radio" name="gender" value="other" <%=
+          data.gender==='other'?'checked':'' %> /> Other</label
+        >
+        <span class="error"><%= errors.gender || '' %></span>
+      </div>
+      <div>
+        <label>Hobbies</label>
+        <% const hobbies =
+        Array.isArray(data.hobbies)?data.hobbies:(data.hobbies?[data.hobbies]:[]);
+        %>
+        <label
+          ><input type="checkbox" name="hobbies" value="sports" <%=
+          hobbies.includes('sports')?'checked':'' %> /> Sports</label
+        >
+        <label
+          ><input type="checkbox" name="hobbies" value="music" <%=
+          hobbies.includes('music')?'checked':'' %> /> Music</label
+        >
+        <label
+          ><input type="checkbox" name="hobbies" value="reading" <%=
+          hobbies.includes('reading')?'checked':'' %> /> Reading</label
+        >
+        <label
+          ><input type="checkbox" name="hobbies" value="coding" <%=
+          hobbies.includes('coding')?'checked':'' %> /> Coding</label
+        >
+        <span class="error"><%= errors.hobbies || '' %></span>
+      </div>
+      <div>
+        <label>Profile Picture (jpg/png/gif, max 2MB)</label>
+        <input type="file" name="profilePic" accept="image/*" />
+        <span class="error"><%= errors.profilePic || '' %></span>
+      </div>
+      <div>
+        <label>Other Pictures (up to 5, image/pdf, max 2MB each)</label>
+        <input
+          type="file"
+          name="otherPics"
+          multiple
+          accept="image/*,application/pdf"
+        />
+      </div>
+      <div>
+        <button type="submit">Register</button>
+      </div>
+    </form>
+    <hr />
+    <nav>
+      <a href="/file/login">File session login</a> |
+      <a href="/redis/login">Redis session login</a> |
+      <a href="/admin/login">Admin login</a>
+    </nav>
+  </body>
+</html>

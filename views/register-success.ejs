@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Registration Success</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <h1>Submitted Data</h1>
+    <table border="1" cellpadding="8" cellspacing="0">
+      <tr>
+        <th>Username</th>
+        <td><%= data.username %></td>
+      </tr>
+      <tr>
+        <th>Email</th>
+        <td><%= data.email %></td>
+      </tr>
+      <tr>
+        <th>Gender</th>
+        <td><%= data.gender %></td>
+      </tr>
+      <tr>
+        <th>Hobbies</th>
+        <td><%= data.hobbies.join(', ') %></td>
+      </tr>
+      <tr>
+        <th>Profile Pic</th>
+        <td>
+          <img
+            src="<%= data.profilePic %>"
+            alt="Profile"
+            style="max-height: 150px"
+          />
+          <br />
+          <a href="/download/profile/<%= data.profilePic.split('/').pop() %>"
+            >Download</a
+          >
+        </td>
+      </tr>
+      <tr>
+        <th>Other Files</th>
+        <td>
+          <% if (data.otherPics.length === 0) { %>
+          <i>None</i>
+          <% } else { %>
+          <ul>
+            <% data.otherPics.forEach(f => { %>
+            <li>
+              <% if (f.endsWith('.pdf')) { %>
+              <a href="<%= f %>" target="_blank">View PDF</a>
+              <% } else { %>
+              <img src="<%= f %>" alt="Other" style="max-height: 120px" />
+              <% } %> -
+              <a href="/download/others/<%= f.split('/').pop() %>">Download</a>
+            </li>
+            <% }) %>
+          </ul>
+          <% } %>
+        </td>
+      </tr>
+    </table>
+    <p><a href="/register">Back</a></p>
+  </body>
+</html>
